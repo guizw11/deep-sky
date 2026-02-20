@@ -7,10 +7,10 @@ const informations_box = document.getElementById("informations");
 
 const photo_date = document.getElementById("photo_date");
 
+const copyright = document.getElementById("copyright")
 const error_message = document.getElementById("error_message")
 
-const copyright = document.getElementById("copyright")
-
+const title = document.getElementById("title")
 
 informations_box.style.display = "none";
 loading.style.display = "none";
@@ -26,10 +26,12 @@ async function loadToday() {
 
     const data = await response.json();
     image.src = data.url;
-    image.alt = data.copyright || "NASA"
+    image.alt = data.copyright || "NASA";
+    title.textContent = data.title;
+    copyright.textContent = "© " + (data.copyright || "NASA");
     const photo_date_formatted = new Date(data.date + "T00:00:00").toLocaleDateString("pt-BR");
     photo_date.textContent = photo_date_formatted;
-    copyright.textContent = data.copyright;
+
     image.onload = () => {
       informations_box.style.display = "block";
       loading.style.display = "none";
@@ -58,6 +60,8 @@ async function loadRandom() {
     const data = await response.json();
     image.src = data.url;
     image.alt = data.copyright || "NASA"
+    title.textContent = data.title
+    copyright.textContent = "© " + (data.copyright || "NASA");
     const photo_date_formatted = new Date(data.date + "T00:00:00").toLocaleDateString("pt-BR");
     photo_date.textContent = photo_date_formatted;
     image.onload = () => {
@@ -89,6 +93,8 @@ user_date.addEventListener("change", async () => {
         const data = await response.json();
         image.src = data.url;
         image.alt = data.copyright || "NASA"
+        title.textContent = data.title
+        copyright.textContent = "© " + (data.copyright || "NASA");
         const photo_date_formatted = new Date(data.date + "T00:00:00").toLocaleDateString("pt-BR");
         photo_date.textContent = photo_date_formatted;
         image.onload = () => {
