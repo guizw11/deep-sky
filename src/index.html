@@ -29,7 +29,7 @@
     <section class="min-h-[80vh]">
       <div class="w-[85%] max-w-[1200px] mx-auto relative">
         <div class="flex flex-col justify-center items-center gap-2 pt-2">
-          <button type="button" class="p-2 border-1 rounded-lg border-gray-100 text-gray-200 bg-gray-700 py-2 px-32 md:px-36 md:text-2xl md:mb-3 transition duration-500 active:bg-gray-100 active:scale-105 active:text-slate-900 hover:bg-gray-100 hover:scale-105 hover:text-slate-900">
+          <button type="button" class="p-2 border-1 rounded-lg border-gray-100 text-gray-200 bg-gray-700 py-2 px-32 md:px-36 md:text-2xl md:mb-3 transition duration-500 active:bg-gray-100 active:scale-105 active:text-slate-900 hover:bg-gray-100 hover:scale-105 hover:text-slate-900" onclick="loadToday()">
             Foto de Hoje
           </button>
           <button type="button" class="p-2 border-1 rounded-lg border-gray-100 text-gray-200 bg-gray-700 py-2 px-28 md:px-32 md:text-2xl transition duration-500 active:bg-gray-100 active:scale-105 active:text-slate-900 hover:bg-gray-100 hover:scale-105 hover:text-slate-900">
@@ -37,10 +37,35 @@
           </button>
           <label for="date" class="text-gray-200">Escolher Data</label>
           <input type="date" id="date" class="border-1 rounded-lg border-gray-100 text-gray-200 bg-gray-700 px-4 md:text-2xl transition duration-500 active:bg-gray-100 active:scale-105 active:text-slate-900 hover:bg-gray-100 hover:scale-105 hover:text-slate-900">
+          
+          <div id="loading" class="w-3 mt-20 md:mt-32">
+            <div id="spinner" class="w-10 h-10 rounded-full animate-spin border-t-2 border-t-gray-200 border-b-2">
+              
+            </div>
+          </div>
+          
+          <p id="error_message" class="text-2xl text-black z-10 bg-red-700 p-5 rounded-xl"></p>
+          
+          <div id="informations" class="flex flex-col justify-center gap-3 my-4 md:my-7">
+            
+            <p id="photo_date" class="text-center text-gray-200 font-normal"></p>
+            
+            <div id="photo-container" class="md:max-w-[60%] mx-auto">
+              
+              <img id="photo" src="" alt="">
+              
+            </div>
+            
+            <p id="copyright" class="text-center text-gray-200 font-normal"></p>
+          </div>
+          
         </div>
+        
         
       </div>
     </section>
   </main>
+  
+  <script src="js/script.js"></script>
 </body>
 </html>
