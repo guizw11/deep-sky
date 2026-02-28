@@ -30,7 +30,11 @@ clearView();
 async function callApi(url) {
   try {
     const response = await fetch(url);
-    if (!response.ok) throw new Error("Houve um erro: " + response.status);
+    if (!response.ok) {
+      if (response.status === 429) throw new Error("Limite de requisições atingido.");
+      if (response.status === 400) throw new Error("Data inválida.");
+      throw new Error("Houve um erro: " + response.status);
+    }
     const data = await response.json();
     
     image.src = data.url;
@@ -46,7 +50,11 @@ async function callApi(url) {
       loading.style.display = "none";
     };
   } catch(error) {
-      error_message.textContent = error.message;
+      if (error.message === "Failed to fetch") {
+          error_message.textContent = "Sem conexão com a internet.";
+      } else {
+        error_message.textContent = error.message;
+        }
       loading.style.display = "none";
       error_message.style.display = "block";    
   }
