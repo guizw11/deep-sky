@@ -27,8 +27,14 @@ function randomDate() {
 
 clearView();
 
+let isLoading = false;
+
 async function callApi(url) {
   try {
+    if (isLoading) return;
+    
+    isLoading = true;
+    
     const response = await fetch(url);
     if (!response.ok) {
       if (response.status === 429) throw new Error("Limite de requisições atingido.");
@@ -48,15 +54,25 @@ async function callApi(url) {
     image.onload = () => {
       informations_box.style.display = "block";
       loading.style.display = "none";
+      isLoading = false;
     };
+    
+    image.onerror = () => {
+      error_message.textContent = "Erro ao carregar imagem.";
+      error_message.style.display = "block";
+      loading.style.display = "none";
+      isLoading = false;
+    };
+    
   } catch(error) {
       if (error.message === "Failed to fetch") {
           error_message.textContent = "Sem conexão com a internet.";
       } else {
         error_message.textContent = error.message;
-        }
+      }
       loading.style.display = "none";
-      error_message.style.display = "block";    
+      error_message.style.display = "block";
+      isLoading = false;
   }
 }
 
