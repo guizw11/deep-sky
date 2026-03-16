@@ -46,6 +46,7 @@ async function callApi(url) {
     if (!response.ok) {
       if (response.status === 429) throw new Error("Limite de requisições atingido.");
       if (response.status === 400) throw new Error("Data inválida.");
+      if (response.status === 500) throw new Error("Imagem indisponível, tente outra data!")
       throw new Error("Houve um erro: " + response.status);
     }
     
